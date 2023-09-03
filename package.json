@@ -10,7 +10,7 @@
     "astro": "astro",
     "format": "prettier --write",
     "lint:fix": "eslint src --ext .astro,.ts,.tsx --fix",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest watch",
     "test:coverage": "vitest --coverage",
     "prepare": "husky install"
