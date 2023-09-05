@@ -54,7 +54,7 @@ const { title, image } = Astro.props;
             <img src={LogoImage.src} alt="Logo" class="h-5" />
           </a>
           <div class="w-6 h-6">
-            <EnhancedBasket client:only="react" />
+            <EnhancedBasket client:load  />
           </div>
         </div>
         <a
@@ -65,7 +65,7 @@ const { title, image } = Astro.props;
         </a>
         <EnhancedSearchBar client:load className="md:max-w-sm" />
         <div class="w-6 h-6">
-          <EnhancedBasket client:only="react" className="hidden md:block" />
+          <EnhancedBasket client:load  className="hidden md:block" />
         </div>
       </header>
       <div class="flex flex-col w-full h-full px-4 py-4">
