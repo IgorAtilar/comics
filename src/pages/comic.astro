@@ -1,12 +1,12 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { AddToCartButton } from '../../components';
-import { getComicById } from '../../infra/api/endpoints/comic';
-import { formatPrice } from '../../utils/strings';
+import Layout from '../layouts/Layout.astro';
+import { AddToCartButton } from '../components';
+import { getComicById } from '../infra/api/endpoints/comic';
+import { formatPrice } from '../utils/strings';
 
 export const prerender = true;
 
-const { id } = Astro.params;
+const id = Astro.url.searchParams.get('id') || '';
 
 if (!id) {
   Astro.redirect('/404');
