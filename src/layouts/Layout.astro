@@ -2,12 +2,14 @@
 import { EnhancedSearchBar, EnhancedBasket } from '../components';
 import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react';
 import LogoImage from '../assets/logo.svg';
+import DefaultOgImage from '../assets/og-image.png';
 
 interface Props {
   title: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { title, image } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,12 +20,25 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/x-icon" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Koulen&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
+    <meta
+      name="description"
+      content="Comics! Your One-Stop Shop for All Things Superhero! Dive into epic adventures, discover iconic stories, and collect the coolest memorabilia. Join us on an unforgettable journey!"
+    />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Comics! Your One-Stop Shop for All Things Superhero! Dive into epic adventures, discover iconic stories, and collect the coolest memorabilia. Join us on an unforgettable journey!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://comics-orcin.vercel.app/" />
+    <meta property="og:image" content={image ?? DefaultOgImage.src} />
+    <meta property="og:site_name" content="Comics!" />
+    <meta property="og:author" content="Igor Atilar" />
   </head>
   <body
     class="bg-adventure text-fantasy antialiased flex flex-col items-center min-h-screen">

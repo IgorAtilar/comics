@@ -27,7 +27,7 @@ const description =
   comic?.description && comic.description !== 'null' ? comic.description : '';
 ---
 
-<Layout title={title}>
+<Layout title={title} image={comic?.thumbnail}>
   <h3 class="font-heading text-action text-2xl mb-2">
     {comic?.title ?? ''}
   </h3>
