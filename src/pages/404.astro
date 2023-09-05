@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NotFoundIcon from '../assets/not-found.png';
+import { ButtonLink } from '../components';
+---
+
+<Layout title="Comics! Not found :(">
+  <div class="flex flex-col justify-center gap-4 items-center min-h-screen">
+    <img
+      src={NotFoundIcon.src}
+      alt="404: Not found"
+      class="w-64 h-80 md:w-44 md:h-64 object-center aspect-auto"
+    />
+    <h1 class="font-heading text-action text-2xl">404: Not found</h1>
+    <p class="text-action text-lg">
+      Sorry, we couldn't find the page you were looking for.
+    </p>
+    <ButtonLink href="/" className="md:max-w-md mt-4">Go back home</ButtonLink>
+  </div>
+</Layout>
