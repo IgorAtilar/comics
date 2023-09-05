@@ -1,5 +1,5 @@
 ---
-import { EnhancedSearchBar, EnhancedBasket } from '../components';
+import { SearchBar, EnhancedBasket } from '../components';
 import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react';
 import LogoImage from '../assets/logo.svg';
 
@@ -65,7 +65,7 @@ const { title, image } = Astro.props;
           title="Home">
           <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
         </a>
-        <EnhancedSearchBar client:load className="md:max-w-sm" />
+        <SearchBar client:load />
         <div class="w-6 h-6">
           <EnhancedBasket client:load className="hidden md:block" />
         </div>
