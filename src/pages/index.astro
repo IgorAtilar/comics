@@ -5,14 +5,14 @@ import { ButtonLink } from '../components';
 import SpiderManBannerImage from '../assets/home/spider-man-banner.jpg';
 import {
   getComicSpotlight,
-  getLatestRealeases
+  getLatestReleases
 } from '../infra/api/endpoints/comic';
 import { getComicUrl } from '../utils/urls';
 
 export const prerender = true;
 
-const comicSpotlight = getComicSpotlight();
-const latestReleases = getLatestRealeases();
+const comicSpotlight = await getComicSpotlight();
+const latestReleases = await getLatestReleases();
 ---
 
 <Layout title="Comics! Unleash your inner hero!">
@@ -32,59 +32,60 @@ const latestReleases = getLatestRealeases();
     />
   </section>
 
-  <section class="mb-12">
-    <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
-      Comic spotlight
-    </h2>
-    <div
-      class="flex flex-col gap-3 md:flex-row items-center justify-center md:justify-between md:items-stretch">
-      <div class="flex w-11/12 md:w-10/12 flex-col items-center md:items-end">
-        <img
-          src={comicSpotlight.thumbnail}
-          alt={comicSpotlight.title}
-          class="w-auto aspect-auto"
-        />
-      </div>
-      <div
-        class="flex flex-col md:w-2/3 gap-3 items-center md:items-center md:max-w-2xl md:justify-around border-red">
-        <h3
-          class="font-heading text-2xl text-center text-action md:text-3xl md:text-start">
-          {comicSpotlight.title}
-        </h3>
-        <p class="text-sm text-fantasy md:text-lg">
-          {comicSpotlight.description}
-        </p>
-        <ButtonLink
-          className="text-md md:text-lg md:mt-auto md:max-w-lg"
-          href={getComicUrl({ id: comicSpotlight.id ?? '' })}>
-          Read more
-        </ButtonLink>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
-      Latest releases
-    </h2>
-
-    <div
-      class="flex gap-4 flex-nowrap overflow-x-scroll scroll-smooth md:flex-wrap md:justify-center md:overflow-hidden">
-      {
-        latestReleases.map((comic) => (
-          <a
-            href={getComicUrl({
-              id: comic.id ?? ''
-            })}
-            class="min-w-fit focus:outline-none focus:ring-2">
+  {
+    comicSpotlight && (
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
+          Comic spotlight
+        </h2>
+        <div class="flex flex-col gap-3 md:flex-row items-center justify-center md:justify-between md:items-stretch">
+          <div class="flex w-11/12 md:w-10/12 flex-col items-center md:items-end">
             <img
-              src={comic.thumbnail}
-              alt={comic.title}
-              class="w-56 aspect-auto"
+              src={comicSpotlight.thumbnail}
+              alt={comicSpotlight.title}
+              class="w-auto aspect-auto"
             />
-          </a>
-        ))
-      }
-    </div>
-  </section>
+          </div>
+          <div class="flex flex-col md:w-2/3 gap-3 items-center md:items-center md:max-w-2xl md:justify-around border-red">
+            <h3 class="font-heading text-2xl text-center text-action md:text-3xl md:text-start">
+              {comicSpotlight.title}
+            </h3>
+            <p class="text-sm text-fantasy md:text-lg">
+              {comicSpotlight.description}
+            </p>
+            <ButtonLink
+              className="text-md md:text-lg md:mt-auto md:max-w-lg"
+              href={getComicUrl({ id: comicSpotlight.id ?? '' })}>
+              Read more
+            </ButtonLink>
+          </div>
+        </div>
+      </section>
+    )
+  }
+  {
+    latestReleases.length && (
+      <section>
+        <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
+          Latest releases
+        </h2>
+
+        <div class="flex gap-4 flex-nowrap overflow-x-scroll scroll-smooth md:flex-wrap md:justify-center md:overflow-hidden">
+          {latestReleases.map((comic) => (
+            <a
+              href={getComicUrl({
+                id: comic.id ?? ''
+              })}
+              class="min-w-fit focus:outline-none focus:ring-2">
+              <img
+                src={comic.thumbnail}
+                alt={comic.title}
+                class="w-56 aspect-auto"
+              />
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 </Layout>
