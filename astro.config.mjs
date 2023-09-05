@@ -9,6 +9,5 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   adapter: vercel({
     analytics: true,
-    functionPerRoute: false,
   })
 });

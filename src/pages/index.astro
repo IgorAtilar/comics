@@ -33,7 +33,7 @@ const latestReleases = await getLatestReleases();
   </section>
 
   {
-    comicSpotlight && (
+    !!comicSpotlight && (
       <section class="mb-12">
         <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
           Comic spotlight
@@ -64,7 +64,7 @@ const latestReleases = await getLatestReleases();
     )
   }
   {
-    latestReleases.length && (
+    !!latestReleases.length && (
       <section>
         <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
           Latest releases
