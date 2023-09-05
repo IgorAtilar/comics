@@ -55,6 +55,6 @@ npm run dev
 
 ```
 
-## :squirrel: Autor
+## :milky_way: Autor
 
 <b>[Igor Atilar](https://www.linkedin.com/in/igor-atilar/)</b>
