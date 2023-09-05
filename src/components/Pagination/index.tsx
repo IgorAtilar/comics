@@ -1,5 +1,5 @@
+import { getSearchUrl } from '../../utils/urls';
 import { Pagination, type PaginationProps } from './component';
-import { getSearchUrl } from '../../helpers/search';
 
 export const EnhancedPagination = ({
   total,

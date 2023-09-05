@@ -107,7 +107,7 @@ export const searchComics = async ({
     const offset = page ? (page - 1) * limit : undefined;
     const data = await fetch(getSearchComicsUrl({ limit, offset, query }), {
       headers: getDefaultHeaders()
-    }).catch();
+    });
 
     const response: SearchComicsRawResponse = await data.json();
 
@@ -142,4 +142,29 @@ export const searchComics = async ({
   };
 
   return result;
+};
+
+export const getComicById = async ({ id }: { id: string }) => {
+  try {
+    const data = await fetch(createMarvelApiUrl({ endpoint: `comics/${id}` }), {
+      headers: getDefaultHeaders()
+    });
+
+    const response: SearchComicsRawResponse = await data.json();
+
+    const {
+      data: { results }
+    } = response;
+
+    const [comic] = results;
+
+    const result = ComicModel.safeParse(comic);
+
+    if (result.success) {
+      const { data } = result;
+      return data;
+    }
+  } catch {}
+
+  return undefined;
 };

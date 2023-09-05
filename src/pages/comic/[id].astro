@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { AddToCartButton } from '../../components';
+import { getComicById } from '../../infra/api/endpoints/comic';
+import { formatPrice } from '../../utils/strings';
+
+const { id } = Astro.params;
+
+if (!id) {
+  Astro.redirect('/404');
+}
+
+const comic = await getComicById({ id: id ?? '' });
+console.log(comic);
+
+if (!comic) {
+  Astro.redirect('/404');
+}
+
+const title = `Comics! - ${comic?.title ? comic.title : `Comic #${id}`}`;
+const creators =
+  comic?.creators?.map((creator) => creator.name).join(', ') ?? '';
+
+const characters =
+  `${comic?.characters?.map((character) => character.name).join(', ')}` ?? '';
+
+const description =
+  comic?.description && comic.description !== 'null' ? comic.description : '';
+---
+
+<Layout title={title}>
+  <h3 class="font-heading text-action text-2xl mb-2">
+    {comic?.title ?? ''}
+  </h3>
+  <span class="text-fantasy text-xl mb-4">
+    {formatPrice(comic?.prices?.[0]?.price ?? 0)}
+  </span>
+  <section class="flex flex-col items-center min-h-screen w-full mb-24">
+    <img
+      class="w-56 aspect-auto object-center mb-3 md:w-80"
+      src={comic?.thumbnail}
+      alt={comic?.title ?? ''}
+    />
+    <AddToCartButton
+      className="mb-11 md:w-1/2"
+      comic={comic || {}}
+      client:load
+    />
+    <div class="flex flex-col w-full items-start">
+      {
+        description && (
+          <div>
+            <h4 class="font-heading text-action text-xl mb-2">Description</h4>
+            <p class="text-center text-fantasy text-xl mb-4">{description}</p>
+          </div>
+        )
+      }
+      {
+        creators && (
+          <div>
+            <h4 class="font-heading text-action text-xl mb-2">Creators</h4>
+            <p class="text-center text-fantasy text-xl mb-4">{creators}</p>
+          </div>
+        )
+      }
+      {
+        characters && (
+          <div>
+            <h4 class="font-heading text-action text-xl mb-2">Characters</h4>
+            <p class="text-center text-fantasy text-xl mb-4">{characters}</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Layout>

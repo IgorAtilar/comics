@@ -1,4 +1,4 @@
-import { getSearchUrl } from '../../helpers/search';
+import { getSearchUrl } from '../../utils/urls';
 import { SearchBar } from './component';
 
 export const EnhancedSearchBar = ({ className }: { className?: string }) => {
