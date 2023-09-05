@@ -4,6 +4,7 @@ import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react';
 import LogoImage from '../assets/logo.svg';
 
 import DefaultOgImage from '../assets/og-image.jpg';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -40,6 +41,7 @@ const { title, image } = Astro.props;
     <meta property="og:image" content={image ?? DefaultOgImage.src} />
     <meta property="og:site_name" content="Comics!" />
     <meta property="og:author" content="Igor Atilar" />
+    <ViewTransitions />
   </head>
   <body
     class="bg-adventure text-fantasy antialiased flex flex-col items-center min-h-screen">
@@ -54,7 +56,7 @@ const { title, image } = Astro.props;
             <img src={LogoImage.src} alt="Logo" class="h-5" />
           </a>
           <div class="w-6 h-6">
-            <EnhancedBasket client:load  />
+            <EnhancedBasket client:only="react" />
           </div>
         </div>
         <a
@@ -65,7 +67,7 @@ const { title, image } = Astro.props;
         </a>
         <EnhancedSearchBar client:load className="md:max-w-sm" />
         <div class="w-6 h-6">
-          <EnhancedBasket client:load  className="hidden md:block" />
+          <EnhancedBasket client:only="react" className="hidden md:block" />
         </div>
       </header>
       <div class="flex flex-col w-full h-full px-4 py-4">

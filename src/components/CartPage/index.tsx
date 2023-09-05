@@ -5,9 +5,12 @@ import {
   removeQuantity,
   removeFromCart
 } from '../../infra/stores/cart';
-import { ButtonLink, CartItem, Button } from '..';
+import { Button, ButtonLink, CartItem } from '..';
 import { getComicUrl } from '../../utils/urls';
 import { formatPrice } from '../../utils/strings';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast.success('Thank you for your purchase! 🎉');
 
 export const CartPage = () => {
   const { count, items } = useStore($cart);
@@ -20,6 +23,10 @@ export const CartPage = () => {
     const price = comic?.prices?.[0].price ?? 0;
     return acc + price * (comic.quantity ?? 0);
   }, 0);
+
+  const handleCheckout = () => {
+    notify();
+  };
 
   if (!count) {
     return (
@@ -36,7 +43,7 @@ export const CartPage = () => {
   }
 
   return (
-    <div className="flex flex-col w-full items-center justify-center">
+    <div className="flex flex-col w-full items-center justify-center overflow-hidden">
       <h4 className="text-lg mb-3">
         {countText} | {formatPrice(total)}
       </h4>
@@ -73,9 +80,12 @@ export const CartPage = () => {
           <span>{formatPrice(total)}</span>
         </div>
         <div className="flex flex-row w-full justify-center items-center">
-          <Button className="md:max-w-md ">Checkout</Button>
+          <Button className="md:max-w-md" onClick={handleCheckout}>
+            Checkout
+          </Button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
