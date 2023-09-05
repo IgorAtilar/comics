@@ -1,5 +1,5 @@
 ---
-import { SearchBar, Basket } from '../components';
+import { EnhancedSearchBar, Basket } from '../components';
 import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react';
 import LogoImage from '../assets/logo.svg';
 
@@ -29,11 +29,21 @@ const { title } = Astro.props;
       <header
         class="flex flex-col items-center justify-center w-full gap-y-2 bg-drama sticky top-0 px-4 py-4 md:flex-row md:justify-between z-50">
         <div class="flex w-full justify-between md:hidden">
-          <img src={LogoImage.src} alt="Logo" class="h-5" />
+          <a
+            href="/"
+            class="text-action focus:outline-none focus:ring-2 cursor-pointer"
+            title="Home">
+            <img src={LogoImage.src} alt="Logo" class="h-5" />
+          </a>
           <Basket client:load />
         </div>
-        <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
-        <SearchBar client:load className="md:max-w-sm" />
+        <a
+          href="/"
+          class="text-action focus:outline-none focus:ring-2 cursor-pointer"
+          title="Home">
+          <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
+        </a>
+        <EnhancedSearchBar client:load className="md:max-w-sm" />
         <Basket client:load className="hidden md:block" />
       </header>
       <div class="flex flex-col w-full h-full px-4 py-4">

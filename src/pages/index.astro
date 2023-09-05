@@ -3,13 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import LogoImage from '../assets/logo.svg';
 import { ButtonLink } from '../components';
 import SpiderManBannerImage from '../assets/home/spider-man-banner.jpg';
-import { getComicSpotlight, getLatestRealeases } from './api/routes/comic';
-import type { Comic } from './api/entities/Comic';
+import {
+  getComicSpotlight,
+  getLatestRealeases
+} from '../infra/api/endpoints/comic';
 
 export const prerender = true;
 
-const comicSpotlight: Comic = await getComicSpotlight().json();
-const latestReleases: Comic[] = await getLatestRealeases().json();
+const comicSpotlight = getComicSpotlight();
+const latestReleases = getLatestRealeases();
 ---
 
 <Layout title="Comics! Unleash your inner hero!">

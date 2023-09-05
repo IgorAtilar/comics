@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, describe, it, vi } from 'vitest';
 import { MIN_SEARCH_LENGTH } from '../../consts';
-import { SearchBar } from '.';
+import { SearchBar } from './component';
 
 describe('Components: SearchBar', () => {
   it(`should not call the onSubmit function when the input value is less than ${MIN_SEARCH_LENGTH}`, async () => {
