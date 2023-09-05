@@ -15,7 +15,7 @@ const { comics, total, limit } = await searchComics({ query: query, page });
 
 <Layout title={title}>
   <h3 class="font-heading text-action text-lg mb-2">{query} ({total})</h3>
-  <div class="flex flex-wrap justify-center gap-8 items-start min-h-screen">
+  <ul class="flex flex-wrap justify-center gap-8 items-start min-h-screen">
     {
       comics.length === 0 && (
         <div class="flex flex-col justify-center items-center min-h-screen">
@@ -40,7 +40,7 @@ const { comics, total, limit } = await searchComics({ query: query, page });
         />
       ))
     }
-  </div>
+  </ul>
   {
     comics.length > 0 && (
       <div class="flex justify-center items-center mt-8">

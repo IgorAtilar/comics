@@ -7,3 +7,5 @@ export const getSearchUrl = ({
 }) => `/search?q=${query}${page ? `&page=${page}` : ''}`;
 
 export const getComicUrl = ({ id }: { id: string }) => `/comic/${id}`;
+
+export const getCartUrl = () => '/cart';

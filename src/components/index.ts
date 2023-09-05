@@ -5,3 +5,5 @@ export * from './Button';
 export * from './Card';
 export * from './Pagination';
 export * from './AddToCartButton';
+export * from './CartItem';
+export * from './CartPage';
