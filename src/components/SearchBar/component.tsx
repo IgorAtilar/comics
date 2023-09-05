@@ -1,29 +1,26 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import { cn } from '../../utils/ui';
 import { MIN_SEARCH_LENGTH, MAX_SEARCH_LENGTH } from '../../consts';
 
 export type SearchBarProps = {
   className?: string;
-  onSubmit?: (search: string) => void;
+  getSearchUrl?: (search: string) => string;
 };
 
-export const SearchBar = ({
-  onSubmit = () => {},
-  className
-}: SearchBarProps) => {
+export const SearchBar = ({ getSearchUrl, className }: SearchBarProps) => {
+  const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const search = inputRef.current?.value.trim() ?? '';
-
     const isSearchValid =
       search.length >= MIN_SEARCH_LENGTH && search.length <= MAX_SEARCH_LENGTH;
 
-    if (!isSearchValid) return;
+    if (!isSearchValid) {
+      e.preventDefault();
 
-    onSubmit?.(search);
+      return;
+    }
 
     inputRef.current?.blur();
 
@@ -35,6 +32,7 @@ export const SearchBar = ({
   return (
     <form
       role="search"
+      action={getSearchUrl?.(search.trim())}
       onSubmit={handleSearch}
       className={cn(
         'flex items-center gap-x-1 justify-between w-full bg-comedy rounded-[2rem] px-3 py-2 focus-within:ring-2',
@@ -49,6 +47,9 @@ export const SearchBar = ({
         minLength={MIN_SEARCH_LENGTH}
         maxLength={MAX_SEARCH_LENGTH}
         required
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
       />
       <button
         type="submit"
