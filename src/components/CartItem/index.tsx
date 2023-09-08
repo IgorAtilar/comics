@@ -1,5 +1,7 @@
-import { Trash, Plus, Minus } from '@phosphor-icons/react';
 import { formatPrice } from '../../utils/strings';
+import Minus from '../../assets/icons/minus.svg';
+import Plus from '../../assets/icons/plus.svg';
+import Trash from '../../assets/icons/trash.svg';
 
 export type CartItemProps = {
   title: string;
@@ -41,7 +43,7 @@ export const CartItem = ({
           className="focus:outline-none focus:ring-2"
           title="Remove from cart"
           onClick={onRemove}>
-          <Trash className="w-6 h-6" />
+          <img src={Trash.src} className="w-6 h-6" />
         </button>
       </div>
       <a
@@ -61,7 +63,7 @@ export const CartItem = ({
             className="flex justify-center items-center focus:outline-none focus:ring-2 w-8 h-8"
             title="decrement quantity"
             onClick={onDecrement}>
-            <Minus className="w-4 h-4" />
+            <img src={Minus.src} className="w-4 h-4" />
           </button>
           <span
             className="border-r border-l border-action p-1 min-w-[2rem] h-8 text-center font-bold"
@@ -72,7 +74,7 @@ export const CartItem = ({
             className="flex justify-center items-center focus:outline-none focus:ring-2 w-8 h-8"
             title="increment quantity"
             onClick={onIncrement}>
-            <Plus className="w-4 h-4" />
+            <img src={Plus.src} className="w-4 h-4" />
           </button>
         </div>
         <div>

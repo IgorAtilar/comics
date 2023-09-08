@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import MagnifyingGlass from '../../assets/icons/magnifying-glass.svg';
 import { cn } from '../../utils/ui';
 import { MIN_SEARCH_LENGTH, MAX_SEARCH_LENGTH } from '../../consts';
 import { getSearchUrl } from '../../utils/urls';
@@ -58,7 +58,7 @@ export const SearchBar = ({ className }: SearchBarProps) => {
       <button
         type="submit"
         className="p-1 rounded-full focus:outline-none focus:ring-2">
-        <MagnifyingGlass className="w-5 h-5 text-action" />
+        <img src={MagnifyingGlass.src} className="w-5 h-5 text-action " />
       </button>
     </form>
   );

@@ -1,6 +1,6 @@
 import { type ComponentProps } from 'react';
-import { Basket as BasketIcon } from '@phosphor-icons/react';
 import { Counter } from '../Counter';
+import BasketIcon from '../../assets/icons/basket.svg';
 import { cn } from '../../utils/ui';
 import { getCartUrl } from '../../utils/urls';
 
@@ -16,7 +16,7 @@ export const Basket = ({ className, count = 0, ...htmlProps }: BasketProps) => (
       className
     )}
     {...htmlProps}>
-    <BasketIcon className="h-6 w-6 text-action" />
+    <img src={BasketIcon.src} alt="basket" className="h-6 w-6 text-action " />
     <Counter count={count} className="absolute -top-3 -right-3" />
   </a>
 );

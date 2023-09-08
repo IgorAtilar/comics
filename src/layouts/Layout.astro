@@ -1,7 +1,8 @@
 ---
 import { SearchBar, EnhancedBasket } from '../components';
-import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react';
 import LogoImage from '../assets/logo.svg';
+import GithubLogo from '../assets/icons/github-logo.svg';
+import LinkedinLogo from '../assets/icons/linkedin-logo.svg';
 
 import DefaultOgImage from '../assets/og-image.jpg';
 import { ViewTransitions } from 'astro:transitions';
@@ -87,7 +88,11 @@ const { title, image } = Astro.props;
             rel="noopener noreferrer"
             class="text-action focus:outline-none focus:ring-2"
             title="Igor's LinkedIn">
-            <LinkedinLogo className="inline-block w-6 h-6" />
+            <img
+              src={LinkedinLogo.src}
+              alt="Logo"
+              class="inline-block w-6 h-6 fill-current"
+            />
           </a>
           <a
             href="https://github.com/IgorAtilar"
@@ -95,7 +100,7 @@ const { title, image } = Astro.props;
             rel="noopener noreferrer"
             class="text-action focus:outline-none focus:ring-2"
             title="Igor's GitHub">
-            <GithubLogo className="inline-block w-6 h-6" />
+            <img src={GithubLogo.src} alt="Logo" class="inline-block w-6 h-6" />
           </a>
         </div>
       </footer>
