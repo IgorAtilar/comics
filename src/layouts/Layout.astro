@@ -1,5 +1,5 @@
 ---
-import { SearchBar, EnhancedBasket } from '../components';
+import { EnhancedSearchBar, EnhancedBasket } from '../components';
 import LogoImage from '../assets/logo.svg';
 import GithubLogo from '../assets/icons/github-logo.svg';
 import LinkedinLogo from '../assets/icons/linkedin-logo.svg';
@@ -66,7 +66,7 @@ const { title, image } = Astro.props;
           title="Home">
           <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
         </a>
-        <SearchBar client:load />
+        <EnhancedSearchBar client:load className="md:max-w-sm" />
         <div class="w-6 h-6">
           <EnhancedBasket client:load className="hidden md:block" />
         </div>
