@@ -20,11 +20,6 @@ const creatorsPreprocess = (creators: unknown) => {
   }
 };
 
-const PriceModel = z.object({
-  type: z.string(),
-  price: z.number()
-});
-
 export const ComicModel = z
   .object({
     id: z.preprocess(stringPreprocess, z.string()).optional(),
@@ -42,7 +37,7 @@ export const ComicWithCharactersModel = z
     title: z.string().optional(),
     description: z.string().optional(),
     thumbnail: z.string().optional(),
-    prices: z.array(PriceModel).optional(),
+    price: z.number().optional(),
     creators: z.array(CreatorModel).optional(),
     characters: z.array(ComicCharacterModel).optional()
   })

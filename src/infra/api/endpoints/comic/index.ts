@@ -15,7 +15,8 @@ import {
   getDefaultSearchLimit,
   getComicSpotlightUrl,
   getLatestReleasesUrl,
-  getSearchComicsUrl
+  getSearchComicsUrl,
+  getRawComicPrice
 } from './helpers';
 
 export const getComicSpotlight = async () => {
@@ -31,7 +32,12 @@ export const getComicSpotlight = async () => {
     } = response;
 
     const comics: Comic[] = results.reduce<Comic[]>((acc, comic) => {
-      const result = ComicModel.safeParse(comic);
+      const price = getRawComicPrice(comic.prices);
+
+      const result = ComicModel.safeParse({
+        ...comic,
+        price
+      });
 
       if (result.success) {
         const { data } = result;
@@ -70,7 +76,11 @@ export const getLatestReleases = async () => {
     } = response;
 
     const comics: Comic[] = results.reduce<Comic[]>((acc, comic) => {
-      const result = ComicModel.safeParse(comic);
+      const price = getRawComicPrice(comic.prices);
+      const result = ComicModel.safeParse({
+        ...comic,
+        price
+      });
 
       if (result.success) {
         const { data } = result;
@@ -108,9 +118,7 @@ export const searchComics = async ({
     } = response;
 
     const comics = results.reduce<Comic[]>((acc, comic) => {
-      const { price } = comic.prices.find(
-        (price) => price.type === 'printPrice'
-      ) ?? { price: 0 };
+      const price = getRawComicPrice(comic.prices);
 
       const result = ComicModel.safeParse({
         ...comic,
@@ -189,7 +197,12 @@ export const getComicById = async ({ id }: { id: string }) => {
 
     const [comic] = results;
 
-    const result = ComicModel.safeParse(comic);
+    const price = getRawComicPrice(comic.prices);
+
+    const result = ComicModel.safeParse({
+      ...comic,
+      price
+    });
 
     if (result.success) {
       const { data } = result;

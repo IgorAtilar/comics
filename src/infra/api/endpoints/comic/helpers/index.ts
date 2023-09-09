@@ -1,4 +1,5 @@
 import { createMarvelApiUrl } from '../../../helpers/createMarvelApiUrl';
+import type { RawComic } from '../../../types/Comic';
 
 export const getDefaultSearchLimit = () => 20;
 
@@ -42,4 +43,10 @@ export const getSearchComicsUrl = ({
   }
 
   return comicsUrl;
+};
+
+export const getRawComicPrice = (prices: RawComic['prices']) => {
+  const price = prices.find((price) => price.type === 'printPrice')?.price;
+
+  return price ?? 0;
 };

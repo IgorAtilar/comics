@@ -31,7 +31,7 @@ const characters = comic?.characters || [];
     {comic?.title ?? ''}
   </h3>
   <span class="text-fantasy text-xl mb-4">
-    {formatPrice(comic?.prices?.[0]?.price ?? 0)}
+    {formatPrice(comic?.price ?? 0)}
   </span>
   <section class="flex flex-col items-center min-h-screen w-full mb-24">
     <img
