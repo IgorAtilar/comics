@@ -6,7 +6,10 @@ import type {
 } from '../../types/SearchComic';
 import { ComicModel, ComicWithCharactersModel } from '../../models/Comic';
 import { getDefaultHeaders } from '../../helpers/getDefaultHeaders';
-import type { ResponseComicCharactersResponse } from '../../types/Character';
+import type {
+  Character,
+  ResponseComicCharactersResponse
+} from '../../types/Character';
 import { CharacterModel } from '../../models/Character';
 import {
   getDefaultSearchLimit,
@@ -105,7 +108,14 @@ export const searchComics = async ({
     } = response;
 
     const comics = results.reduce<Comic[]>((acc, comic) => {
-      const result = ComicModel.safeParse(comic);
+      const { price } = comic.prices.find(
+        (price) => price.type === 'printPrice'
+      ) ?? { price: 0 };
+
+      const result = ComicModel.safeParse({
+        ...comic,
+        price
+      });
 
       if (result.success) {
         const { data } = result;
@@ -148,7 +158,7 @@ export const getComicCharacters = async ({ id }: { id: string }) => {
       data: { results }
     } = response;
 
-    const characters = results.reduce<Comic[]>((acc, character) => {
+    const characters = results.reduce<Character[]>((acc, character) => {
       const result = CharacterModel.safeParse(character);
 
       if (result.success) {

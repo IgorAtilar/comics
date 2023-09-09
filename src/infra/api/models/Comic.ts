@@ -31,7 +31,7 @@ export const ComicModel = z
     title: z.preprocess(stringPreprocess, z.string()).optional(),
     description: z.preprocess(stringPreprocess, z.string()).optional(),
     thumbnail: ThumbnailModel,
-    prices: z.array(PriceModel).optional(),
+    price: z.number().optional(),
     creators: z.preprocess(creatorsPreprocess, z.array(CreatorModel)).optional()
   })
   .strip();

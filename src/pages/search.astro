@@ -16,7 +16,7 @@ const { comics, total, limit } = await searchComics({ query: query, page });
 
 <Layout title={title}>
   <h3 class="font-heading text-action text-lg mb-2">{query} ({total})</h3>
-  <ul class="flex flex-wrap justify-center gap-8 items-start min-h-screen">
+  <ul class="flex flex-wrap gap-8 justify-center min-h-screen">
     {
       comics.length === 0 && (
         <div class="flex flex-col justify-center items-center min-h-screen">
@@ -33,7 +33,7 @@ const { comics, total, limit } = await searchComics({ query: query, page });
       comics.map((comic) => (
         <Card
           title={comic.title ?? ''}
-          price={comic.prices?.[0].price ?? 0}
+          price={comic.price ?? 0}
           image={comic.thumbnail ?? ''}
           url={getComicUrl({
             id: comic.id ?? ''
