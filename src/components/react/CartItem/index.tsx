@@ -1,4 +1,4 @@
-import { formatPrice } from '../../utils/strings';
+import { formatPrice } from '../../../utils/strings';
 
 export type CartItemProps = {
   title: string;

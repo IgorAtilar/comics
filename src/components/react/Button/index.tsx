@@ -1,5 +1,5 @@
 import { type ComponentProps } from 'react';
-import { cn } from '../../utils/ui';
+import { cn } from '../../../utils/ui';
 
 const BUTTON_STYLE =
   'p-3 bg-fantasy text-drama text-sm rounded-3xl w-full text-center leading-4 focus:outline-none focus:ring-2';

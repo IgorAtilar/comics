@@ -1,0 +1,30 @@
+---
+import { EnhancedSearchBar, EnhancedBasket } from './react';
+import LogoImage from '../assets/logo.svg';
+---
+
+<header
+  transition:persist="header"
+  class="flex flex-col items-center justify-center w-full gap-y-2 bg-drama sticky top-0 px-4 py-4 md:flex-row md:justify-between z-50">
+  <div class="flex w-full justify-between md:hidden">
+    <a
+      href="/"
+      class="text-action focus:outline-none focus:ring-2 cursor-pointer"
+      title="Home">
+      <img src={LogoImage.src} alt="Logo" class="h-5" />
+    </a>
+    <div class="w-6 h-6">
+      <EnhancedBasket client:load />
+    </div>
+  </div>
+  <a
+    href="/"
+    class="text-action focus:outline-none focus:ring-2 cursor-pointer"
+    title="Home">
+    <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
+  </a>
+  <EnhancedSearchBar client:load className="md:max-w-sm" />
+  <div class="w-6 h-6">
+    <EnhancedBasket client:load className="hidden md:block" />
+  </div>
+</header>

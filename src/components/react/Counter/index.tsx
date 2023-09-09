@@ -1,4 +1,4 @@
-import { cn } from '../../utils/ui';
+import { cn } from '../../../utils/ui';
 
 export const Counter = ({
   count = 0,

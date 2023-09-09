@@ -6,6 +6,6 @@ export const getSearchUrl = ({
   page?: number;
 }) => `/search?q=${query}&page=${page}`;
 
-export const getComicUrl = ({ id }: { id: string }) => `/comic?id=${id}`;
+export const getComicUrl = ({ id }: { id: string }) => `/comic/${id}`;
 
 export const getCartUrl = () => '/cart';

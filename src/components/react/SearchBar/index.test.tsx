@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, describe, it, vi } from 'vitest';
-import { MIN_SEARCH_LENGTH } from '../../consts';
+import { MIN_SEARCH_LENGTH } from '../../../consts';
 import { SearchBar } from './component';
 
 describe('Components: SearchBar', () => {

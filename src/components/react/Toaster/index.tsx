@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from '@nanostores/react';
-import { $toast, hideToast } from '../../infra/stores/toast';
-import { cn } from '../../utils/ui';
+import { $toast, hideToast } from '../../../infra/stores/toast';
+import { cn } from '../../../utils/ui';
 
 export const AUTO_CLOSE_TOAST_DELAY = 3000;
 

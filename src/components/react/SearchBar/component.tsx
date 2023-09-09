@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { cn } from '../../utils/ui';
-import { MIN_SEARCH_LENGTH, MAX_SEARCH_LENGTH } from '../../consts';
+import { cn } from '../../../utils/ui';
+import { MIN_SEARCH_LENGTH, MAX_SEARCH_LENGTH } from '../../../consts';
 
 export type SearchBarProps = {
   className?: string;
