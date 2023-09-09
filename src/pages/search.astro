@@ -32,7 +32,6 @@ const { comics, total, limit } = await searchComics({ query: query, page });
     {
       comics.map((comic) => (
         <Card
-          transition:name="card"
           title={comic.title ?? ''}
           price={comic.prices?.[0].price ?? 0}
           image={comic.thumbnail ?? ''}

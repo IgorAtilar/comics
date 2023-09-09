@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import LogoImage from '../assets/logo.svg';
+import { Image } from 'astro:assets';
 import { ButtonLink } from '../components/react';
-import SpiderManBannerImage from '../assets/home/spider-man-banner.jpg';
+import SpiderManBannerImage from '../assets/home/spider-man-banner.webp';
 import {
   getComicSpotlight,
   getLatestReleases
@@ -15,34 +15,85 @@ const latestReleases = await getLatestReleases();
 
 <Layout title="Comics! Unleash your inner hero!">
   <section class="flex flex-col items-center relative pt-8 md:pt-20 mb-12">
+    <div>
+      <Image
+        src={SpiderManBannerImage}
+        alt="Spider man banner"
+        class="w-64 md:w-96 hover:scale-105 hover:grayscale transition-all duration-700 ease-in-out cursor-pointer"
+      />
+    </div>
     <h1
-      class="flex flex-col w-full items-center justify-center font-heading text-4xl md:text-6xl absolute -top-1 md:top-6">
-      <span class="text-action">Unleash your</span>
-      <span class="text-drama">inner hero at</span>
-      <span class="bg-drama px-1 py-1 w-max rounded-lg">
-        <img src={LogoImage.src} alt="Logo" class="h-12 md:h-20" />
+      class="flex flex-col gap-2 items-center justify-center font-heading text-4xl md:text-5xl absolute -top-1 md:top-8 cursor-pointer">
+      <span
+        class="text-action px-1 py-1 w-max rounded-lg hover:text-drama hover:bg-action transition-colors duration-300 ease-linear"
+        >Unleash your</span
+      >
+      <span
+        class="text-drama px-1 py-1 w-max rounded-lg hover:text-action hover:bg-drama duration-300 ease-linea"
+        >inner hero at</span
+      >
+      <span
+        class="bg-drama text-action hover:text-drama hover:bg-action px-1 py-1 w-max rounded-lg transition-colors duration-300 ease-linea">
+        <svg
+          width="200"
+          height="58"
+          viewBox="0 0 69 20"
+          class="fill-current"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="Comics">
+          <path
+            d="M5.42955 20C4.42759 20 3.51138 19.7457 2.68093 19.2371C1.8595 18.7284 1.20506 18.0472 0.717622 17.1935C0.239207 16.3306 0 15.3724 0 14.3188L0.0270801 5.61308C0.0270801 4.57766 0.261774 3.64214 0.731162 2.80654C1.20055 1.96185 1.84596 1.2852 2.66739 0.776567C3.49784 0.258856 4.41856 0 5.42955 0C6.45859 0 7.3748 0.249773 8.17818 0.749319C8.99058 1.24886 9.63599 1.92552 10.1144 2.77929C10.6018 3.62398 10.8456 4.56857 10.8456 5.61308V6.89373C10.8456 6.96639 10.8095 7.00272 10.7372 7.00272H7.62304C7.55082 7.00272 7.51472 6.96639 7.51472 6.89373V5.61308C7.51472 4.99546 7.31613 4.46412 6.91896 4.01907C6.52178 3.57402 6.02531 3.3515 5.42955 3.3515C4.7706 3.3515 4.26511 3.57856 3.91307 4.0327C3.56103 4.48683 3.38501 5.01362 3.38501 5.61308V14.3188C3.38501 15 3.58359 15.5586 3.98077 15.9945C4.37794 16.4214 4.86087 16.6349 5.42955 16.6349C6.02531 16.6349 6.52178 16.3987 6.91896 15.9264C7.31613 15.445 7.51472 14.9092 7.51472 14.3188V13.0245C7.51472 12.9519 7.55082 12.9155 7.62304 12.9155H10.7643C10.8365 12.9155 10.8726 12.9519 10.8726 13.0245V14.3188C10.8726 15.3633 10.6289 16.317 10.1415 17.1798C9.64502 18.0336 8.99058 18.7193 8.17818 19.2371C7.36578 19.7457 6.44957 20 5.42955 20Z"
+          ></path>
+          <path
+            d="M18.0218 20C17.0379 20 16.1307 19.7457 15.3002 19.2371C14.4788 18.7284 13.8153 18.0518 13.3099 17.2071C12.8134 16.3533 12.5651 15.4178 12.5651 14.4005L12.5922 5.55858C12.5922 4.52316 12.8405 3.59219 13.3369 2.76567C13.8244 1.93006 14.4833 1.26249 15.3138 0.762943C16.1442 0.254314 17.0469 0 18.0218 0C19.0328 0 19.94 0.249773 20.7433 0.749319C21.5557 1.24886 22.2057 1.92098 22.6931 2.76567C23.1896 3.60127 23.4378 4.53224 23.4378 5.55858L23.4649 14.4005C23.4649 15.4178 23.2212 16.3488 22.7337 17.1935C22.2372 18.0472 21.5783 18.7284 20.7569 19.2371C19.9354 19.7457 19.0237 20 18.0218 20ZM18.0218 16.6349C18.5814 16.6349 19.0689 16.4078 19.4841 15.9537C19.8993 15.4905 20.1069 14.9728 20.1069 14.4005L20.0799 5.55858C20.0799 4.94096 19.8858 4.41871 19.4976 3.99183C19.1095 3.56494 18.6175 3.3515 18.0218 3.3515C17.4531 3.3515 16.9657 3.5604 16.5595 3.9782C16.1533 4.396 15.9502 4.9228 15.9502 5.55858V14.4005C15.9502 15.0091 16.1533 15.5359 16.5595 15.9809C16.9657 16.4169 17.4531 16.6349 18.0218 16.6349Z"
+          ></path>
+          <path
+            d="M28.8132 19.7275H25.6719C25.5997 19.7275 25.5636 19.6821 25.5636 19.5913L25.6177 0.422343C25.6177 0.349682 25.6538 0.313351 25.7261 0.313351H29.1111C29.1833 0.313351 29.2465 0.349682 29.3006 0.422343L31.8326 4.10082L34.3511 0.422343C34.4052 0.349682 34.4729 0.313351 34.5542 0.313351H37.9527C38.0339 0.313351 38.0746 0.349682 38.0746 0.422343L38.1287 19.5913C38.1287 19.6821 38.0926 19.7275 38.0204 19.7275H34.8791C34.8069 19.7275 34.7708 19.6821 34.7708 19.5913L34.7437 5.35422L31.8326 9.6049L28.9486 5.35422L28.9215 19.5913C28.9215 19.6821 28.8854 19.7275 28.8132 19.7275Z"
+          ></path>
+          <path
+            d="M43.7343 19.7275H40.593C40.5027 19.7275 40.4576 19.6821 40.4576 19.5913L40.4847 0.422343C40.4847 0.349682 40.5208 0.313351 40.593 0.313351H43.7072C43.7794 0.313351 43.8155 0.349682 43.8155 0.422343L43.8426 19.5913C43.8426 19.6821 43.8065 19.7275 43.7343 19.7275Z"
+          ></path>
+          <path
+            d="M51.3844 20C50.3825 20 49.4662 19.7457 48.6358 19.2371C47.8144 18.7284 47.1599 18.0472 46.6725 17.1935C46.1941 16.3306 45.9549 15.3724 45.9549 14.3188L45.9819 5.61308C45.9819 4.57766 46.2166 3.64214 46.686 2.80654C47.1554 1.96185 47.8008 1.2852 48.6223 0.776567C49.4527 0.258856 50.3734 0 51.3844 0C52.4135 0 53.3297 0.249773 54.133 0.749319C54.9454 1.24886 55.5909 1.92552 56.0693 2.77929C56.5567 3.62398 56.8004 4.56857 56.8004 5.61308V6.89373C56.8004 6.96639 56.7643 7.00272 56.6921 7.00272H53.5779C53.5057 7.00272 53.4696 6.96639 53.4696 6.89373V5.61308C53.4696 4.99546 53.271 4.46412 52.8738 4.01907C52.4766 3.57402 51.9802 3.3515 51.3844 3.3515C50.7255 3.3515 50.22 3.57856 49.8679 4.0327C49.5159 4.48683 49.3399 5.01362 49.3399 5.61308V14.3188C49.3399 15 49.5385 15.5586 49.9356 15.9945C50.3328 16.4214 50.8157 16.6349 51.3844 16.6349C51.9802 16.6349 52.4766 16.3987 52.8738 15.9264C53.271 15.445 53.4696 14.9092 53.4696 14.3188V13.0245C53.4696 12.9519 53.5057 12.9155 53.5779 12.9155H56.7192C56.7914 12.9155 56.8275 12.9519 56.8275 13.0245V14.3188C56.8275 15.3633 56.5838 16.317 56.0964 17.1798C55.5999 18.0336 54.9454 18.7193 54.133 19.2371C53.3206 19.7457 52.4044 20 51.3844 20Z"
+          ></path>
+          <path
+            d="M63.5569 20C62.573 20 61.6658 19.7457 60.8354 19.2371C60.0139 18.7284 59.355 18.0518 58.8585 17.2071C58.3711 16.3533 58.1274 15.4178 58.1274 14.4005V13.1199C58.1274 13.02 58.1725 12.97 58.2628 12.97H61.377C61.4492 12.97 61.4853 13.02 61.4853 13.1199V14.4005C61.4853 15.0091 61.6884 15.5359 62.0946 15.9809C62.5008 16.4169 62.9882 16.6349 63.5569 16.6349C64.1346 16.6349 64.6266 16.4124 65.0328 15.9673C65.439 15.5132 65.6421 14.9909 65.6421 14.4005C65.6421 13.7193 65.1998 13.1244 64.3151 12.6158C64.1707 12.525 63.9812 12.416 63.7465 12.2888C63.5208 12.1526 63.25 11.9982 62.9341 11.8256C62.6181 11.653 62.3112 11.485 62.0133 11.3215C61.7155 11.149 61.4266 10.9855 61.1468 10.8311C60.1358 10.2316 59.3821 9.48229 58.8856 8.58311C58.3982 7.67484 58.1544 6.65758 58.1544 5.53133C58.1544 4.49591 58.4072 3.5604 58.9127 2.7248C59.4182 1.89827 60.0771 1.24432 60.8895 0.762943C61.7109 0.27248 62.6001 0.027248 63.5569 0.027248C64.5408 0.027248 65.4435 0.27248 66.2649 0.762943C67.0863 1.26249 67.7408 1.92552 68.2282 2.75204C68.7247 3.57856 68.9729 4.505 68.9729 5.53133V7.82016C68.9729 7.89282 68.9368 7.92915 68.8646 7.92915H65.7504C65.6782 7.92915 65.6421 7.89282 65.6421 7.82016L65.615 5.53133C65.615 4.87738 65.4119 4.34605 65.0057 3.93733C64.5995 3.52861 64.1166 3.32425 63.5569 3.32425C62.9882 3.32425 62.5008 3.54223 62.0946 3.9782C61.6884 4.41417 61.4853 4.93188 61.4853 5.53133C61.4853 6.13987 61.6117 6.6485 61.8644 7.05722C62.1262 7.46594 62.6001 7.85649 63.2861 8.22888C63.3583 8.26521 63.5253 8.35604 63.7871 8.50136C64.0489 8.64668 64.3377 8.81017 64.6536 8.99183C64.9786 9.1644 65.272 9.32334 65.5338 9.46866C65.7955 9.6049 65.9535 9.68665 66.0077 9.7139C66.9284 10.2316 67.655 10.8674 68.1876 11.6213C68.7292 12.3751 69 13.3015 69 14.4005C69 15.4632 68.7563 16.4169 68.2688 17.2616C67.7724 18.1063 67.1134 18.7738 66.292 19.2643C65.4706 19.7548 64.5589 20 63.5569 20Z"
+          ></path>
+          <path
+            d="M31.3497 12.1708C31.3497 12.4918 31.091 12.752 30.772 12.752C30.4529 12.752 30.1943 12.4918 30.1943 12.1708C30.1943 11.8497 30.4529 11.5895 30.772 11.5895C31.091 11.5895 31.3497 11.8497 31.3497 12.1708Z"
+          ></path>
+          <path
+            d="M33.6605 12.1708C33.6605 12.4918 33.4019 12.752 33.0828 12.752C32.7638 12.752 32.5051 12.4918 32.5051 12.1708C32.5051 11.8497 32.7638 11.5895 33.0828 11.5895C33.4019 11.5895 33.6605 11.8497 33.6605 12.1708Z"
+          ></path>
+        </svg>
       </span>
     </h1>
-    <img
-      src={SpiderManBannerImage.src}
-      alt="Spider man banner"
-      class="w-64 md:w-96"
-    />
   </section>
-
   {
     !!comicSpotlight && (
       <section class="mb-12">
-        <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
-          Comic spotlight
-        </h2>
+        <div class="relative w-fit group cursor-pointer mb-3 md:mb-5">
+          <h2 class="font-heading text-2xl text-action md:text-5xl">
+            Comic spotlight
+          </h2>
+          <span class="absolute left-0 w-0 h-2 bg-action transition-all group-hover:w-full duration-500" />
+        </div>
         <div class="flex flex-col gap-3 md:flex-row items-center justify-center md:justify-between md:items-stretch">
           <div class="flex w-11/12 md:w-10/12 flex-col items-center md:items-end">
-            <img
-              src={comicSpotlight.thumbnail}
-              alt={comicSpotlight.title}
-              class="w-auto aspect-auto"
-            />
+            <a
+              href={getComicUrl({ id: comicSpotlight.id ?? '' })}
+              class="focus:outline-none focus:ring-2">
+              <Image
+                src={{
+                  src: comicSpotlight.thumbnail ?? '',
+                  width: 356,
+                  height: 550,
+                  format: 'jpg'
+                }}
+                alt={comicSpotlight.title ?? ''}
+                class="w-auto rounded aspect-auto scale-95 hover:scale-100 transition-all duration-500 ease-in-out"
+              />
+            </a>
           </div>
           <div class="flex flex-col md:w-2/3 gap-3 items-center md:items-center md:max-w-2xl md:justify-around border-red">
             <h3 class="font-heading text-2xl text-center text-action md:text-3xl md:text-start">
@@ -64,9 +115,12 @@ const latestReleases = await getLatestReleases();
   {
     !!latestReleases.length && (
       <section>
-        <h2 class="font-heading text-2xl text-action mb-3 md:text-5xl md:mb-4">
-          Latest releases
-        </h2>
+        <div class="relative w-fit group cursor-pointer mb-3 md:mb-5">
+          <h2 class="font-heading text-2xl text-action md:text-5xl">
+            Latest releases
+          </h2>
+          <span class="absolute left-0 w-0 h-2 bg-action transition-all group-hover:w-full duration-500" />
+        </div>
 
         <div class="flex gap-4 flex-nowrap overflow-x-scroll scroll-smooth md:flex-wrap md:justify-center md:overflow-hidden">
           {latestReleases.map((comic) => (
@@ -75,10 +129,15 @@ const latestReleases = await getLatestReleases();
                 id: comic.id ?? ''
               })}
               class="min-w-fit focus:outline-none focus:ring-2">
-              <img
-                src={comic.thumbnail}
-                alt={comic.title}
-                class="w-56 aspect-auto"
+              <Image
+                src={{
+                  src: comic.thumbnail ?? '',
+                  width: 356,
+                  height: 550,
+                  format: 'jpg'
+                }}
+                alt={comic.title ?? ''}
+                class="w-56 aspect-auto rounded"
               />
             </a>
           ))}
