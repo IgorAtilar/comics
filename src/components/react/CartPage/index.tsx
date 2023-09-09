@@ -17,7 +17,7 @@ export const CartPage = () => {
   const countText = count === 1 ? '1 item' : `${count} items`;
 
   const total = comics.reduce((acc, comic) => {
-    const price = comic?.prices?.[0].price ?? 0;
+    const price = comic?.price ?? 0;
     return acc + price * (comic.quantity ?? 0);
   }, 0);
 
@@ -46,7 +46,7 @@ export const CartPage = () => {
             key={comic.id}
             cover={comic.thumbnail ?? ''}
             title={comic.title ?? ''}
-            price={comic?.prices?.[0].price ?? 0}
+            price={comic?.price ?? 0}
             onDecrement={() => {
               removeQuantity(comic.id ?? '');
             }}
