@@ -4,8 +4,6 @@ import { AddToCartButton } from '../components';
 import { getComicById } from '../infra/api/endpoints/comic';
 import { formatPrice } from '../utils/strings';
 
-export const prerender = true;
-
 const id = Astro.url.searchParams.get('id') || '';
 
 if (!id) {
