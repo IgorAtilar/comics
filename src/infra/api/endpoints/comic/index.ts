@@ -4,52 +4,16 @@ import type {
   SearchComicsRawResponse,
   SearchComicsResponse
 } from '../../types/SearchComic';
-import { ComicModel } from '../../models/Comic';
+import { ComicModel, ComicWithCharactersModel } from '../../models/Comic';
 import { getDefaultHeaders } from '../../helpers/getDefaultHeaders';
-
-const DEFAULT_SEARCH_LIMIT = 20;
-
-const getComicSpotlightUrl = () => {
-  const comicsUrl = createMarvelApiUrl({ endpoint: 'comics' });
-
-  comicsUrl.searchParams.append('orderBy', '-focDate');
-  comicsUrl.searchParams.append('limit', '5');
-
-  return comicsUrl;
-};
-
-const getLatestReleasesUrl = (limit = 8) => {
-  const comicsUrl = createMarvelApiUrl({ endpoint: 'comics' });
-
-  comicsUrl.searchParams.append('dateDescriptor', 'lastWeek');
-
-  if (limit) {
-    comicsUrl.searchParams.append('limit', limit.toString());
-  }
-
-  return comicsUrl;
-};
-
-const getSearchComicsUrl = ({
-  limit,
-  offset,
-  query
-}: {
-  query: string;
-  limit?: number;
-  offset?: number;
-}) => {
-  const comicsUrl = createMarvelApiUrl({ endpoint: 'comics' });
-  comicsUrl.searchParams.append('titleStartsWith', query);
-  if (limit) {
-    comicsUrl.searchParams.append('limit', limit.toString());
-  }
-  if (offset) {
-    comicsUrl.searchParams.append('offset', offset.toString());
-  }
-
-  return comicsUrl;
-};
+import type { ResponseComicCharactersResponse } from '../../types/Character';
+import { CharacterModel } from '../../models/Character';
+import {
+  getDefaultSearchLimit,
+  getComicSpotlightUrl,
+  getLatestReleasesUrl,
+  getSearchComicsUrl
+} from './helpers';
 
 export const getComicSpotlight = async () => {
   try {
@@ -120,7 +84,7 @@ export const getLatestReleases = async () => {
 };
 
 export const searchComics = async ({
-  limit = DEFAULT_SEARCH_LIMIT,
+  limit = getDefaultSearchLimit(),
   page,
   query
 }: {
@@ -169,6 +133,38 @@ export const searchComics = async ({
   return result;
 };
 
+export const getComicCharacters = async ({ id }: { id: string }) => {
+  try {
+    const data = await fetch(
+      createMarvelApiUrl({ endpoint: `comics/${id}/characters` }),
+      {
+        headers: getDefaultHeaders()
+      }
+    );
+
+    const response: ResponseComicCharactersResponse = await data.json();
+
+    const {
+      data: { results }
+    } = response;
+
+    const characters = results.reduce<Comic[]>((acc, character) => {
+      const result = CharacterModel.safeParse(character);
+
+      if (result.success) {
+        const { data } = result;
+        acc.push(data);
+      }
+
+      return acc;
+    }, []);
+
+    return { characters };
+  } catch {
+    return { characters: [] };
+  }
+};
+
 export const getComicById = async ({ id }: { id: string }) => {
   try {
     const data = await fetch(createMarvelApiUrl({ endpoint: `comics/${id}` }), {
@@ -184,6 +180,27 @@ export const getComicById = async ({ id }: { id: string }) => {
     const [comic] = results;
 
     const result = ComicModel.safeParse(comic);
+
+    if (result.success) {
+      const { data } = result;
+      return data;
+    }
+  } catch {}
+};
+
+export const getComicWithCharactersById = async ({ id }: { id: string }) => {
+  try {
+    const [comic, { characters }] = await Promise.all([
+      getComicById({ id }),
+      getComicCharacters({ id })
+    ]);
+
+    const comicWithCharacters = {
+      ...comic,
+      characters
+    };
+
+    const result = ComicWithCharactersModel.safeParse(comicWithCharacters);
 
     if (result.success) {
       const { data } = result;

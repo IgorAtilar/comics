@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { AddToCartButton } from '../components';
-import { getComicById } from '../infra/api/endpoints/comic';
+import { getComicWithCharactersById } from '../infra/api/endpoints/comic';
 import { formatPrice } from '../utils/strings';
 
 const id = Astro.url.searchParams.get('id') || '';
@@ -10,7 +10,7 @@ if (!id) {
   Astro.redirect('/404');
 }
 
-const comic = await getComicById({ id: id ?? '' });
+const comic = await getComicWithCharactersById({ id: id ?? '' });
 
 if (!comic) {
   Astro.redirect('/404');
@@ -20,11 +20,10 @@ const title = `Comics! - ${comic?.title ? comic.title : `Comic #${id}`}`;
 const creators =
   comic?.creators?.map((creator) => creator.name).join(', ') ?? '';
 
-const characters =
-  `${comic?.characters?.map((character) => character.name).join(', ')}` ?? '';
-
 const description =
   comic?.description && comic.description !== 'null' ? comic.description : '';
+
+const characters = comic?.characters || [];
 ---
 
 <Layout title={title} image={comic?.thumbnail}>
@@ -63,12 +62,31 @@ const description =
           </div>
         )
       }
+
       {
-        characters && (
+        !!characters.length && (
           <div>
             <h4 class="font-heading text-action text-xl mb-2">Characters</h4>
-            <p class="text-center text-fantasy text-xl mb-4">{characters}</p>
+            <ul class="flex gap-2 text-center text-fantasy text-xl mb-4 flex-wrap">
+              {characters.map((character) => (
+                <li class="flex w-28 md:w-32 flex-col items-center gap-2 borde break-all">
+                  <img
+                    class="w-14 md:w-20 md:h-20 rounded-full object-cover"
+                    src={character.thumbnail}
+                    alt={`${character.name} thumbnail`}
+                  />
+                  {character.name}
+                </li>
+              ))}
+            </ul>
           </div>
+        )
+      }
+      {
+        !description && !creators && !characters.length && (
+          <p class="text-center text-fantasy text-xl mb-4">
+            No information available
+          </p>
         )
       }
     </div>
