@@ -4,10 +4,10 @@ import {
   addQuantity,
   removeQuantity,
   removeFromCart
-} from '../../../infra/stores/cart';
-import { getComicUrl, getSuccesUrl } from '../../../utils/urls';
-import { formatPrice } from '../../../utils/strings';
-import { ButtonLink, CartItem } from '../../../components';
+} from '@/infra/stores/cart';
+import { getComicUrl, getSuccesUrl } from '@/utils/urls';
+import { formatPrice } from '@/utils/strings';
+import { ButtonLink, CartItem } from '@/components';
 
 export const CartPage = () => {
   const { count, items } = useStore($cart);

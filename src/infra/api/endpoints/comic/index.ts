@@ -1,16 +1,15 @@
-import type { Comic } from '../../types/Comic';
-import { createMarvelApiUrl } from '../../helpers/createMarvelApiUrl';
+import type { Comic } from '@/infra/api/types/Comic';
+import { createMarvelApiUrl, getDefaultHeaders } from '@/infra/api/helpers';
 import type {
   SearchComicsRawResponse,
   SearchComicsResponse
-} from '../../types/SearchComic';
-import { ComicModel, ComicWithCharactersModel } from '../../models/Comic';
-import { getDefaultHeaders } from '../../helpers/getDefaultHeaders';
+} from '@/infra/api/types/SearchComic';
+import { ComicModel, ComicWithCharactersModel } from '@/infra/api/models/Comic';
 import type {
   Character,
   ResponseComicCharactersResponse
-} from '../../types/Character';
-import { CharacterModel } from '../../models/Character';
+} from '@/infra/api/types/Character';
+import { CharacterModel } from '@/infra/api/models/Character';
 import {
   getDefaultSearchLimit,
   getComicSpotlightUrl,

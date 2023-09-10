@@ -1,9 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Card } from '../components';
-import { EnhancedPagination } from '../components/react';
-import { searchComics } from '../infra/api/endpoints/comic';
-import { getComicUrl } from '../utils/urls';
+import { Layout } from '@/layouts';
+import { Card, EnhancedPagination } from '@/components';
+import { searchComics } from '@/infra/api/endpoints/comic';
+import { getComicUrl } from '@/utils/urls';
 
 const query = Astro.url.searchParams.get('q') || '';
 

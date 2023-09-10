@@ -1,8 +1,8 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { AddToCartButton } from '../../components';
-import { getComicWithCharactersById } from '../../infra/api/endpoints/comic';
-import { formatPrice } from '../../utils/strings';
+import { Layout } from '@/layouts';
+import { AddToCartButton } from '@/components';
+import { getComicWithCharactersById } from '@/infra/api/endpoints/comic';
+import { formatPrice } from '@/utils/strings';
 
 const { id } = Astro.params;
 

@@ -1,7 +1,7 @@
 import { type ComponentProps } from 'react';
-import { Counter } from '../Counter';
-import { cn } from '../../../utils/ui';
-import { getCartUrl } from '../../../utils/urls';
+import { Counter } from '@/components';
+import { cn } from '@/utils/ui';
+import { getCartUrl } from '@/utils/urls';
 
 export type BasketProps = ComponentProps<'a'> & {
   count?: number;

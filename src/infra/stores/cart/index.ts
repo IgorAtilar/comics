@@ -1,5 +1,5 @@
 import { deepMap, action, onMount } from 'nanostores';
-import type { Comic } from '../../api/types/Comic';
+import type { Comic } from '@/infra/api/types/Comic';
 
 const CART_LOCAL_STORAGE_KEY = 'comics@cart';
 

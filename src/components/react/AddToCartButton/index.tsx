@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Button } from '..';
-import type { Comic } from '../../../infra/api/types/Comic';
-import { addToCart } from '../../../infra/stores/cart';
-import { cn } from '../../../utils/ui';
+import { Button } from '@/components';
+import type { Comic } from '@/infra/api/types/Comic';
+import { addToCart } from '@/infra/stores/cart';
+import { cn } from '@/utils/ui';
 
 type AddToCartButtonProps = {
   className?: string;
