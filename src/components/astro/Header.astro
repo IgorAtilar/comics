@@ -1,5 +1,5 @@
 ---
-import { EnhancedSearchBar, EnhancedBasket } from '@/components';
+import { SearchBar, Basket } from '@/components';
 import LogoImage from '@/assets/logo.svg';
 ---
 
@@ -14,7 +14,7 @@ import LogoImage from '@/assets/logo.svg';
       <img src={LogoImage.src} alt="Logo" class="h-5" />
     </a>
     <div class="w-6 h-6">
-      <EnhancedBasket client:load />
+      <Basket client:load />
     </div>
   </div>
   <a
@@ -23,8 +23,8 @@ import LogoImage from '@/assets/logo.svg';
     title="Home">
     <img src={LogoImage.src} alt="Logo" class="hidden h-7 md:block" />
   </a>
-  <EnhancedSearchBar client:load className="md:max-w-sm" />
+  <SearchBar client:load className="md:max-w-sm" />
   <div class="w-6 h-6">
-    <EnhancedBasket client:load className="hidden md:block" />
+    <Basket client:load className="hidden md:block" />
   </div>
 </header>

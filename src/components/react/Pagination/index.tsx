@@ -1,19 +1,26 @@
 import { getSearchUrl } from '@/utils/urls';
-import { Pagination, type PaginationProps } from './component';
+import { PaginationComponent, type PaginationProps } from './component';
 
-export const EnhancedPagination = ({
+export const Pagination = ({
   total,
   limit,
   query,
   page
-}: Omit<PaginationProps, 'getUrl'> & {
+}: Omit<PaginationProps, 'getNextPageUrl'> & {
   query: string;
 }) => {
-  const getUrl = (page: number) =>
+  const getNextPageUrl = (page: number) =>
     getSearchUrl({
       query,
       page
     });
 
-  return <Pagination total={total} limit={limit} page={page} getUrl={getUrl} />;
+  return (
+    <PaginationComponent
+      total={total}
+      limit={limit}
+      page={page}
+      getNextPageUrl={getNextPageUrl}
+    />
+  );
 };

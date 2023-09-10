@@ -4,24 +4,24 @@ export type PaginationProps = {
   total: number;
   limit?: number;
   page?: number;
-  getUrl: (page: number) => string;
+  getNextPageUrl: (page: number) => string;
 };
 
 const SIBLING_COUNT = 1;
 const MIN_PAGE_THRESHOLD = 2 + SIBLING_COUNT;
 
-function generatePagesArray(from: number, to: number) {
+const generatePagesArray = (from: number, to: number) => {
   return [...new Array(to - from)]
     .map((_, index) => from + index + 1)
     .filter((page) => page > 0);
-}
+};
 
-export function Pagination({
+export const PaginationComponent = ({
   total,
   page = 1,
   limit = 20,
-  getUrl
-}: PaginationProps) {
+  getNextPageUrl
+}: PaginationProps) => {
   const lastPage = Math.round(total / limit);
 
   const previousPages =
@@ -37,7 +37,7 @@ export function Pagination({
       <div className="flex items-center justify-center ml-8 gap-x-2">
         {page > 1 + SIBLING_COUNT && (
           <>
-            <PaginationItem number={1} getUrl={getUrl} />
+            <PaginationItem page={1} getNextPageUrl={getNextPageUrl} />
             {page > MIN_PAGE_THRESHOLD && (
               <span className="text-gray-500 text-md">...</span>
             )}
@@ -46,12 +46,24 @@ export function Pagination({
 
         {previousPages.length > 0 &&
           previousPages.map((page) => (
-            <PaginationItem key={page} number={page} getUrl={getUrl} />
+            <PaginationItem
+              key={page}
+              page={page}
+              getNextPageUrl={getNextPageUrl}
+            />
           ))}
-        <PaginationItem number={page} getUrl={getUrl} isCurrent />
+        <PaginationItem
+          page={page}
+          getNextPageUrl={getNextPageUrl}
+          isCurrentPage
+        />
         {nextPages.length > 0 &&
           nextPages.map((page) => (
-            <PaginationItem key={page} number={page} getUrl={getUrl} />
+            <PaginationItem
+              key={page}
+              page={page}
+              getNextPageUrl={getNextPageUrl}
+            />
           ))}
 
         {page + SIBLING_COUNT < lastPage && (
@@ -59,10 +71,10 @@ export function Pagination({
             {page + 1 + SIBLING_COUNT < lastPage && (
               <span className="text-gray-500 text-md">...</span>
             )}
-            <PaginationItem number={lastPage} getUrl={getUrl} />
+            <PaginationItem page={lastPage} getNextPageUrl={getNextPageUrl} />
           </>
         )}
       </div>
     </div>
   );
-}
+};

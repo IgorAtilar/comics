@@ -7,7 +7,7 @@ export type SearchBarProps = {
   onSubmit?: (search: string) => void;
 };
 
-export const SearchBar = ({
+export const SearchBarComponent = ({
   onSubmit = () => {},
   className
 }: SearchBarProps) => {

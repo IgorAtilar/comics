@@ -1,10 +1,10 @@
 import { getSearchUrl } from '@/utils/urls';
-import { SearchBar } from './component';
+import { SearchBarComponent } from './component';
 
-export const EnhancedSearchBar = ({ className }: { className?: string }) => {
+export const SearchBar = ({ className }: { className?: string }) => {
   const handleSubmit = (search: string) => {
     window.location.href = getSearchUrl({ query: search });
   };
 
-  return <SearchBar className={className} onSubmit={handleSubmit} />;
+  return <SearchBarComponent className={className} onSubmit={handleSubmit} />;
 };

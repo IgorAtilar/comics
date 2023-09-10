@@ -1,28 +1,28 @@
 type PaginationItemProps = {
-  isCurrent?: boolean;
-  number: number;
-  getUrl: (page: number) => string;
+  isCurrentPage?: boolean;
+  page: number;
+  getNextPageUrl: (page: number) => string;
 };
 
 export const PaginationItem = ({
-  isCurrent = false,
-  getUrl,
-  number
+  isCurrentPage = false,
+  getNextPageUrl,
+  page
 }: PaginationItemProps) => {
-  if (isCurrent) {
+  if (isCurrentPage) {
     return (
       <a className="bg-action text-drama text-lg w-7 h-7 flex items-center justify-center rounded focus:outline-none focus:ring-2">
-        {number}
+        {page}
       </a>
     );
   }
 
   return (
     <a
-      title={`Go to page ${number}`}
+      title={`Go to page ${page}`}
       className="text-fantasy text-lg w-7 h-7 flex items-center justify-center rounded focus:outline-none focus:ring-2"
-      href={getUrl(number)}>
-      {number}
+      href={getNextPageUrl(page)}>
+      {page}
     </a>
   );
 };

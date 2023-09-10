@@ -1,42 +1,23 @@
-import { useState } from 'react';
-import { Button } from '@/components';
-import type { Comic } from '@/infra/api/types';
-import { addToCart } from '@/infra/stores/cart';
+import { Button } from '../Button';
 import { cn } from '@/utils/ui';
 
 type AddToCartButtonProps = {
   className?: string;
-  comic: Comic;
+  onAddToCart?: () => void;
+  showSuccess?: boolean;
 };
 
-let interval: NodeJS.Timeout | null = null;
-
-export const AddToCartButton = ({ className, comic }: AddToCartButtonProps) => {
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const handleShowSuccess = () => {
-    setShowSuccess(true);
-
-    if (interval) {
-      clearInterval(interval);
-    }
-
-    interval = setTimeout(() => {
-      setShowSuccess(false);
-    }, 2000);
-  };
-
-  const handleAddToCart = () => {
-    addToCart(comic);
-
-    handleShowSuccess();
-  };
-
+export const AddToCartComponent = ({
+  className,
+  onAddToCart,
+  showSuccess = false
+}: AddToCartButtonProps) => {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <Button onClick={handleAddToCart}>Add to cart</Button>
+      <Button onClick={onAddToCart}>Add to cart</Button>
       <div
         role="alert"
+        aria-hidden={!showSuccess}
         className={cn(
           'flex gap-2 bg-green-500 text-drama p-2 rounded transition-all duration-700',
           {

@@ -7,7 +7,7 @@ export type BasketProps = ComponentProps<'a'> & {
   count?: number;
 };
 
-export const Basket = ({
+export const BasketComponent = ({
   className,
   count = 0,
   title,
