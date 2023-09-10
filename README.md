@@ -1,60 +1,108 @@
-# ![logo do projeto](https://github.com/IgorAtilar/comics/assets/73081443/25f0160c-c349-460a-a951-e139a3737e6d)
+<br/>
+<div align="center">
+  <a href="https://comics-orcin.vercel.app">
+    <img src="https://github.com/IgorAtilar/comics/assets/73081443/25f0160c-c349-460a-a951-e139a3737e6d" alt="Logo">
+  </a>
+</div>
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Preview
+## About the project
 
-https://github.com/IgorAtilar/comics/assets/73081443/2b4a8632-5b2c-4279-8ed3-75979d0c46f6
+https://github.com/IgorAtilar/comics/assets/73081443/3a6078e7-50c8-4784-80aa-2acd77994dd0
 
-## Funcionalidades
+Comics! is a project that uses the Marvel API to create a mock comic book store for learning about Astro and Tailwind CSS.
 
-- Home dinâmica com quadrinhos da Marvel;
-- Busca de quadrinhos por nome;
-- Página de detalhes do quadrinho;
-- Adicionar quadrinhos no carrinho;
-- Remover quadrinhos do carrinho;
-- Carrinho com total de itens e valor total;
-- Carrinho com botão para finalizar compra;
+In the Comics! store:
 
-## Tecnologias e ferramentas utilizadas
+- the user can search for comics by name;
+- view the comic details;
+- add them to the cart;
+- and complete the purchase.
 
-- Astro;
-- Tailwindcss;
-- Typescript;
-- Eslint;
-- Prettier;
-- Husky;
-- React;
-- React Testing Library;
-- Vitest.
+### Built With
 
-# Instalação
+[![Astro](https://skillicons.dev/icons?i=astro)](https://astro.build/)
+[![React](https://skillicons.dev/icons?i=react)](https://react.dev/)
+[![Typescript](https://skillicons.dev/icons?i=typescript)](https://www.typescriptlang.org)
+[![TaiwindCSS](https://skillicons.dev/icons?i=tailwind)](https://tailwindcss.com/)
 
-Utilize a versão mais recente do [Node.js](https://nodejs.org/pt-br/download).
+## Getting Started
 
-Clone o projeto na pasta escolhida com o seguinte comando:
+To run the project locally, follow these steps.
 
-```bash
+### Prerequisites
+
+- Node.js 18.17.1 or higher and npm installed on your computer (you can get them [here](https://nodejs.org/en/download));
+- A Marvel API key and hash (you can get them [here](https://developer.marvel.com/)).
+
+### Installation
+
+1. Clone the repo
+
+```sh
 git clone https://github.com/IgorAtilar/comics.git
 ```
 
-Depois acesse o diretório utilizando:
+2. Access the project directory
 
-```bash
+```sh
 cd comics
 ```
 
-Instale as dependências do projeto utilizando:
+3. Install NPM packages
 
-```bash
+```sh
 npm install
 ```
 
-Rode o comando a seguir e o projeto estará rodando em http://localhost:4321;
+4. Create a .env file in the root directory based on the .env.example file and add your Marvel API key and hash
 
-```bash
-npm run dev
-
+```sh
+MARVEL_API_KEY=your_api_key
+MARVEL_API_HASH=your_api_hash
 ```
 
-## :milky_way: Autor
+5. Run the project
 
-<b>[Igor Atilar](https://www.linkedin.com/in/igor-atilar/)</b>
+```sh
+npm run dev
+```
+
+## Usage
+
+You can access the project at http://localhost:4321 after running the project.
+
+## Contact
+
+Igor Atilar - [LinkedIn](https://www.linkedin.com/in/igor-atilar/) - [Github](https://github.com/IgorAtilar)
+
+## Acknowledgments
+
+- [Marvel API](https://developer.marvel.com/)
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React](https://react.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Vitest](https://vitest.dev/)
+- [Phosphor Icons](https://phosphoricons.com/)
+- [Nano Stores](https://github.com/nanostores/nanostores)
