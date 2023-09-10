@@ -119,7 +119,7 @@ export const SuccessPage = () => {
         ))}
       </ul>
       {hasShareApi && (
-        <div className="flex flex-col items-center mt-4">
+        <div className="flex flex-col items-center mt-4 w-28">
           <Button
             onClick={() => {
               handleShare();
