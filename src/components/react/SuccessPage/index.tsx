@@ -1,9 +1,8 @@
 import { useStore } from '@nanostores/react';
-import { toJpeg, toBlob } from 'html-to-image';
 import { $cart } from '../../../infra/stores/cart';
 import { Button, ButtonLink } from '..';
 import { getBaseURL, getSearchUrl } from '../../../utils/urls';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const getCartLevelByTotal = (total: number) => {
   if (total < 100) {
@@ -38,7 +37,6 @@ const getCartLevelEmojiByTotal = (total: number) => {
 };
 
 export const SuccessPage = () => {
-  const cartRef = useRef<HTMLDivElement>(null);
   const [hasShareApi, setHasShareApi] = useState(false);
   const { items, count } = useStore($cart);
 
@@ -58,62 +56,20 @@ export const SuccessPage = () => {
       return;
     }
 
-    if (!cartRef.current) {
-      return;
-    }
-
     const url = getBaseURL();
 
-    toBlob(cartRef.current)
-      .then((blob) => {
-        if (!blob) return;
-
-        const file = new File([blob], 'cart.jpeg', {
-          type: 'image/jpeg'
-        });
-
-        navigator
-          .share({
-            title: 'Comics!',
-            text: 'Check out my comics cart!',
-            url,
-            files: [file]
-          })
-          .then()
-          .catch();
+    await navigator
+      .share({
+        title: 'Comics!',
+        text: 'Buy some comics!',
+        url
       })
       .catch();
   };
 
-  const handleDownload = () => {
-    if (!cartRef.current) return;
+  const shareTitle = `Sorry, we can't send you anything :( Share this website with your friends! :)`;
 
-    void toJpeg(cartRef.current).then((dataUrl) => {
-      const link = document.createElement('a');
-      const currentTime = new Date().getTime();
-      link.download = `cart-${currentTime}.jpeg`;
-
-      link.href = dataUrl;
-      link.target = '_blank';
-
-      link.click();
-    });
-  };
-
-  const handleButtonClick = () => {
-    if (hasShareApi) {
-      handleShare();
-      return;
-    }
-    handleDownload();
-  };
-
-  const shareTitle = `We can&apos;t send you anything, but you can share your cart with your
-          friends :)`;
-
-  const downloadTitle = `We can't send you anything, but you can download your cart image :)`;
-
-  const buttonTitle = hasShareApi ? 'Share' : 'Download';
+  const downloadTitle = `Sorry, we can't send you anything, but you can share this website with your friends! :)`;
 
   if (!count) {
     return (
@@ -145,28 +101,33 @@ export const SuccessPage = () => {
           {hasShareApi ? shareTitle : downloadTitle}
         </p>
       </div>
-      <div ref={cartRef} className="bg-adventure rounded">
-        <h3 className="font-heading text-action text-2xl text-center">
-          My Cart
-        </h3>
-        <p className="text-action text-lg text-center mb-2">
-          {getCartLevelByTotal(total)} {getCartLevelEmojiByTotal(total)}
-        </p>
-        <ul className="flex w-full items-center p-4 justify-center gap-4 md:gap-8 md:max-w-4x flex-wrap">
-          {comics.map((comic) => (
-            <li key={comic.id}>
-              <img
-                src={comic.thumbnail}
-                alt={comic.title}
-                className="w-24 h-24 rounded-full object-cover hover:opacity-75 cursor-pointer"
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex flex-col items-center mt-4">
-        <Button onClick={handleButtonClick}>{buttonTitle}</Button>
-      </div>
+      <h3 className="font-heading text-action text-2xl text-center">
+        Your Cart
+      </h3>
+      <p className="text-action text-lg text-center mb-2">
+        {getCartLevelByTotal(total)} {getCartLevelEmojiByTotal(total)}
+      </p>
+      <ul className="flex w-full items-center p-4 justify-center gap-4 md:gap-8 md:max-w-4x flex-wrap">
+        {comics.map((comic) => (
+          <li key={comic.id}>
+            <img
+              src={comic.thumbnail}
+              alt={comic.title}
+              className="w-24 h-24 rounded-full object-cover hover:opacity-75 cursor-pointer"
+            />
+          </li>
+        ))}
+      </ul>
+      {hasShareApi && (
+        <div className="flex flex-col items-center mt-4">
+          <Button
+            onClick={() => {
+              handleShare();
+            }}>
+            Share
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
