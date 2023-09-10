@@ -1,5 +1,5 @@
 import { createMarvelApiUrl } from '@/infra/api/helpers';
-import type { RawComic } from '@/infra/api/types/Comic';
+import type { RawComic } from '@/infra/api/types';
 
 export const getDefaultSearchLimit = () => 20;
 

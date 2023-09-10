@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components';
-import type { Comic } from '@/infra/api/types/Comic';
+import type { Comic } from '@/infra/api/types';
 import { addToCart } from '@/infra/stores/cart';
 import { cn } from '@/utils/ui';
 

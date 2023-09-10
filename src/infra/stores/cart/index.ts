@@ -1,9 +1,8 @@
 import { deepMap, action, onMount } from 'nanostores';
-import type { Comic } from '@/infra/api/types/Comic';
+import type { Comic } from '@/infra/api/types';
+import { isServer } from '@/utils/runtime';
 
 const CART_LOCAL_STORAGE_KEY = 'comics@cart';
-
-const isServer = import.meta.env.SSR;
 
 type ComicWithQuantity = Comic & { quantity: number };
 
@@ -16,6 +15,8 @@ type Cart = {
   items: Map<Comic['id'], ComicWithQuantity>;
   count: number;
 };
+
+export const $cart = deepMap<Cart>({ items: new Map(), count: 0 });
 
 const parsePersistedCart = (cart: PersistedCart): Cart => {
   const { count, items } = cart;
@@ -58,8 +59,6 @@ const updatePersistedCart = (cart: Cart) => {
 
   localStorage.setItem(CART_LOCAL_STORAGE_KEY, JSON.stringify(parsedCart));
 };
-
-export const $cart = deepMap<Cart>({ items: new Map(), count: 0 });
 
 export const addToCart = action($cart, 'addToCart', (store, comic: Comic) => {
   const { id } = comic;
@@ -181,7 +180,7 @@ export const removeQuantity = action(
 );
 
 onMount($cart, () => {
-  if (isServer) return;
+  if (isServer()) return;
 
   const saved = localStorage.getItem(CART_LOCAL_STORAGE_KEY);
 
