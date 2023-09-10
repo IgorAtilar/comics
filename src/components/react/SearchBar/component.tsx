@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import { cn } from '../../../utils/ui';
-import { MIN_SEARCH_LENGTH, MAX_SEARCH_LENGTH } from '../../../consts';
+import {
+  getMinSearchLength,
+  getMaxSearchLength
+} from '../../../utils/validation';
 
 export type SearchBarProps = {
   className?: string;
@@ -18,7 +21,8 @@ export const SearchBar = ({
     const search = inputRef.current?.value.trim() ?? '';
 
     const isSearchValid =
-      search.length >= MIN_SEARCH_LENGTH && search.length <= MAX_SEARCH_LENGTH;
+      search.length >= getMinSearchLength() &&
+      search.length <= getMaxSearchLength();
 
     if (!isSearchValid) return;
 
@@ -45,8 +49,8 @@ export const SearchBar = ({
         ref={inputRef}
         className="w-full text-base text-fantasy placeholder-action bg-transparent border-none focus:ring-0 focus:border-transparent outline-none caret-action"
         placeholder="Search for a comic"
-        minLength={MIN_SEARCH_LENGTH}
-        maxLength={MAX_SEARCH_LENGTH}
+        minLength={getMinSearchLength()}
+        maxLength={getMaxSearchLength()}
         required
       />
       <button

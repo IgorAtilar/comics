@@ -1,17 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, describe, it, vi } from 'vitest';
-import { MIN_SEARCH_LENGTH } from '../../../consts';
+import { getMinSearchLength } from '../../../utils/validation';
 import { SearchBar } from './component';
 
 describe('Components: SearchBar', () => {
-  it(`should not call the onSubmit function when the input value is less than ${MIN_SEARCH_LENGTH}`, async () => {
+  it(`should not call the onSubmit function when the input value is less than ${getMinSearchLength()}`, async () => {
     const handleSubmit = vi.fn();
     render(<SearchBar onSubmit={handleSubmit} />);
 
     const input = screen.getByRole('searchbox');
 
-    const searchValue = 'a'.repeat(MIN_SEARCH_LENGTH - 1);
+    const searchValue = 'a'.repeat(getMinSearchLength() - 1);
 
     const user = userEvent.setup();
 
@@ -20,12 +20,12 @@ describe('Components: SearchBar', () => {
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 
-  it(`should call the onSubmit function when the input value is greater than ${MIN_SEARCH_LENGTH}`, async () => {
+  it(`should call the onSubmit function when the input value is greater than ${getMinSearchLength()}`, async () => {
     const handleSubmit = vi.fn();
     render(<SearchBar onSubmit={handleSubmit} />);
     const input = screen.getByRole('searchbox');
 
-    const searchValue = 'a'.repeat(MIN_SEARCH_LENGTH);
+    const searchValue = 'a'.repeat(getMinSearchLength());
 
     const user = userEvent.setup();
 
@@ -39,7 +39,7 @@ describe('Components: SearchBar', () => {
     render(<SearchBar onSubmit={handleSubmit} />);
     const input = screen.getByRole('searchbox');
 
-    const searchValue = 'a'.repeat(MIN_SEARCH_LENGTH);
+    const searchValue = 'a'.repeat(getMinSearchLength());
 
     const user = userEvent.setup();
 

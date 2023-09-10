@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/react';
 import { $cart } from '../../../infra/stores/cart';
-import { Button, ButtonLink } from '..';
+import { Button, ButtonLink } from '../../../components';
 import { getBaseURL, getSearchUrl } from '../../../utils/urls';
 import { useEffect, useState } from 'react';
 

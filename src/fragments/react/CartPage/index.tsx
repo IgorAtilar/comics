@@ -5,9 +5,9 @@ import {
   removeQuantity,
   removeFromCart
 } from '../../../infra/stores/cart';
-import { ButtonLink, CartItem } from '..';
 import { getComicUrl, getSuccesUrl } from '../../../utils/urls';
 import { formatPrice } from '../../../utils/strings';
+import { ButtonLink, CartItem } from '../../../components';
 
 export const CartPage = () => {
   const { count, items } = useStore($cart);
