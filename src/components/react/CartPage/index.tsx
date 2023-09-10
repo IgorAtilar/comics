@@ -5,8 +5,8 @@ import {
   removeQuantity,
   removeFromCart
 } from '../../../infra/stores/cart';
-import { Button, ButtonLink, CartItem } from '..';
-import { getComicUrl } from '../../../utils/urls';
+import { ButtonLink, CartItem } from '..';
+import { getComicUrl, getSuccesUrl } from '../../../utils/urls';
 import { formatPrice } from '../../../utils/strings';
 
 export const CartPage = () => {
@@ -73,7 +73,9 @@ export const CartPage = () => {
           <span>{formatPrice(total)}</span>
         </div>
         <div className="flex flex-row w-full justify-center items-center">
-          <Button className="md:max-w-md">Checkout</Button>
+          <ButtonLink href={getSuccesUrl()} className="md:max-w-md">
+            Checkout
+          </ButtonLink>
         </div>
       </div>
     </div>

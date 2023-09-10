@@ -9,3 +9,7 @@ export const getSearchUrl = ({
 export const getComicUrl = ({ id }: { id: string }) => `/comic/${id}`;
 
 export const getCartUrl = () => '/cart';
+
+export const getSuccesUrl = () => '/success';
+
+export const getBaseURL = () => import.meta.env.PUBLIC_BASE_URL;

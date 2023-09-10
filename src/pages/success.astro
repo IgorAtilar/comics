@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SuccessPage } from '../components/react';
+---
+
+<Layout title="Comics! Unleash your inner hero!">
+  <div class="flex flex-col items-center min-h-screen w-full mb-24">
+    <SuccessPage client:only="react" />
+  </div>
+</Layout>

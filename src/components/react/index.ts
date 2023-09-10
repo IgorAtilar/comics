@@ -7,3 +7,4 @@ export * from './AddToCartButton';
 export * from './CartItem';
 export * from './CartPage';
 export * from './Toaster';
+export * from './SuccessPage';
