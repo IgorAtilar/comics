@@ -1,8 +1,11 @@
 <br/>
 <div align="center">
   <a href="https://comics-orcin.vercel.app">
-    <img src="https://github.com/IgorAtilar/comics/assets/73081443/25f0160c-c349-460a-a951-e139a3737e6d" alt="Logo">
+    <img src="https://github.com/IgorAtilar/comics/assets/73081443/4647a12a-2a8e-4e23-a2a2-405f6e81c1be" alt="Logo">
   </a>
+
+[Visit the project](https://comics-orcin.vercel.app)
+
 </div>
 <details>
   <summary>Table of Contents</summary>
