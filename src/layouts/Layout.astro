@@ -1,7 +1,6 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Toaster } from '../components/react';
 
 import DefaultOgImage from '../assets/og-image.jpg';
 import { ViewTransitions } from 'astro:transitions';
@@ -47,11 +46,8 @@ const { title, image } = Astro.props;
     class="bg-adventure text-fantasy antialiased flex flex-col items-center min-h-screen scroll-smo">
     <main class="relative flex flex-col items-center w-full h-full max-w-5xl">
       <Header />
-      <div class="relative flex flex-col w-full h-full">
-        <Toaster client:idle />
-        <div class="px-4 py-4">
-          <slot />
-        </div>
+      <div class="relative px-4 py-4 flex flex-col w-full h-full">
+        <slot />
       </div>
       <Footer />
     </main>
